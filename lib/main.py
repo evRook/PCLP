@@ -181,6 +181,40 @@ def Delete():
         else:
             delete_running = False
             break
+        
+def Update():
+    
+    update_running = True
+    while update_running:
+        
+        print('<------/------>')
+        print('Update contact by ID.')
+
+        input_id = input('-> ')
+        id_res = str(input_id)
+
+        print('<------/------>')
+        print('What would you like to update?')
+        print('First, Last, Phone, Email, Address1, Address2, City, Zipcode, Note')
+
+        input_spec = input('-> ')
+        spec_res = str(input_spec) 
+
+        print('<------/------>')
+        print('Update too:')
+
+        input_update = input('-> ')
+        update_res = str(input_update)
+
+        update_contact = Contacts.get(Contacts.id == id_res)
+        
+        if spec_res.lower() == 'first':
+            update_contact.first_name = update_res
+            update_contact.save()
+        
+
+
+
 
 def Start():
     
@@ -202,6 +236,8 @@ def Start():
             Find()
         elif start_res.lower()== 'delete':
             Delete()
+        elif start_res.lower()== 'update':
+            Update()
         elif start_res.lower() == 'end':
             print('<------/------>')
             print('Thank You for using Contacts!')
