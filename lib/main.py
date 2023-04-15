@@ -24,6 +24,8 @@ class Contacts(BaseModel):
     address1 = CharField(null = True, max_length = 350)
     address2 = CharField(null = True)
     city = CharField(null = True)
+    state = CharField(null = True)
+    country = CharField(null = True)
     zipcode = CharField(null = True)
     note = TextField(null = True)
     created = DateTimeField(default = datetime.datetime.now())
@@ -60,6 +62,12 @@ def Create():
         input_city = input('City: ')
         city_res = str(input_city) 
 
+        input_state = input('State: ')
+        state_res = str(input_state) 
+
+        input_country = input('Country: ')
+        country_res = str(input_country)
+
         input_zip = input('Zipcode: ')
         zip_res = str(input_zip)
 
@@ -74,6 +82,8 @@ def Create():
           address1 = add1_res,
           address2 = add2_res,
           city = city_res,
+          state = state_res,
+          country = country_res,
           zipcode = zip_res,
           note = note_res
         )
@@ -119,7 +129,7 @@ def Find():
         if find_res.lower() == "all":
             for person in all_contacts:
                 print('<------/------>')
-                print('            ID: {} \n    First Name: {} \n     Last Name: {} \n  Phone Number: {} \n         Email: {} \nAddress line 1: {} \nAddress line 2: {} \n          City: {} \n       Zipcode: {} \n         Notes: {} \n       Created: {}'
+                print('            ID: {} \n    First Name: {} \n     Last Name: {} \n  Phone Number: {} \n         Email: {} \nAddress line 1: {} \nAddress line 2: {} \n          City: {} \n         State: {} \n       Country: {} \n       Zipcode: {} \n         Notes: {} \n       Created: {}'
                       .format(person.id,
                               person.first_name, 
                               person.last_name, 
@@ -128,6 +138,8 @@ def Find():
                               person.address1, 
                               person.address2, 
                               person.city, 
+                              person.state,
+                              person.country,
                               person.zipcode, 
                               person.note,
                               person.created
@@ -135,7 +147,7 @@ def Find():
         else:
             for person in contact:
                 print('<------/------>')
-                print('            ID: {} \n    First Name: {} \n     Last Name: {} \n  Phone Number: {} \n         Email: {} \nAddress line 1: {} \nAddress line 2: {} \n          City: {} \n       Zipcode: {} \n         Notes: {} \n       Created: {}'
+                print('            ID: {} \n    First Name: {} \n     Last Name: {} \n  Phone Number: {} \n         Email: {} \nAddress line 1: {} \nAddress line 2: {} \n          City: {} \n         State: {} \n       Country: {} \n       Zipcode: {} \n         Notes: {} \n       Created: {}'
                       .format(person.id,
                               person.first_name, 
                               person.last_name, 
@@ -144,6 +156,8 @@ def Find():
                               person.address1, 
                               person.address2, 
                               person.city, 
+                              person.state,
+                              person.country,
                               person.zipcode, 
                               person.note,
                               person.created
@@ -196,9 +210,29 @@ def Update():
         input_id = input('-> ')
         id_res = str(input_id)
 
+        id_select = Contacts.select().where(Contacts.id == id_res)
+
+        for person in id_select:
+                print('<------/------>')
+                print('            ID: {} \n    First Name: {} \n     Last Name: {} \n  Phone Number: {} \n         Email: {} \nAddress line 1: {} \nAddress line 2: {} \n          City: {} \n         State: {} \n       Country: {} \n       Zipcode: {} \n         Notes: {} \n       Created: {}'
+                      .format(person.id,
+                              person.first_name, 
+                              person.last_name, 
+                              person.phone_number, 
+                              person.email, 
+                              person.address1, 
+                              person.address2, 
+                              person.city, 
+                              person.state,
+                              person.country,
+                              person.zipcode, 
+                              person.note,
+                              person.created
+                              ))
+
         print('<------/------>')
         print('What would you like to update?')
-        print('First, Last, Phone, Email, Address1, Address2, City, Zipcode, Note')
+        print('First, Last, Phone, Email, Address1, Address2, City, State, Country, Zipcode, Note')
 
         input_spec = input('-> ')
         spec_res = str(input_spec) 
@@ -232,6 +266,12 @@ def Update():
         elif spec_res.lower() == 'city':
             update_contact.city = update_res
             update_contact.save()
+        elif spec_res.lower() == 'state':
+            update_contact.state = update_res
+            update_contact.save()
+        elif spec_res.lower() == 'country':
+            update_contact.country = update_res
+            update_contact.save()
         elif spec_res.lower() == 'zipcode':
             update_contact.zipcode = update_res
             update_contact.save()
@@ -241,6 +281,7 @@ def Update():
         else:
             print('<------/------>')
             print(f'COMMAND {spec_res} NOT RECOGNIZED')
+            print('Must input: \nFirst \nLast \nPhone \nEmail \nAddress1 \nAddress2 \nCity \nSate \nCountry \nZipcode \nNote')
 
         print('<------/------>')
         print('Would you like to Update another contact?: Yes(y) No(n)')
