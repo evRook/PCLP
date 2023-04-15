@@ -95,10 +95,13 @@ def Create():
 def Help():
     print('<------/------>')
     print('HELP SCREEN')
-    print('Add -> Create a new contact, First Name, Last Name & Phone Number are REQUIRED.')
     print('Find -> Find a contact by Last Name.')
-    print('Help -> Opens HELP SCREEN')
-    print('End -> Exit Contacts')
+    print('Add -> Create a new contact, First Name, Last Name & Phone Number are REQUIRED.')
+    print('Update -> Update contact info by ID.')
+    print('Delete -> Delete contact info by ID.')
+    print('Help -> Opens HELP SCREEN.')
+    print('End -> Exit Contacts.')
+
 
 def Find():
     
@@ -257,7 +260,7 @@ def Start():
 
         print('<------/------>')
         print('Welcome to Contacts')
-        print('To get started type: Find, Add, Delete, Help, End')
+        print('To get started type: Find, Add, Update, Delete, Help, End')
 
         input_start = input('-> ')
         start_res = str(input_start)
