@@ -111,7 +111,7 @@ def Find():
         input_find = input('-> ')
         find_res = str(input_find)
 
-        contact = Contacts.select().where(Contacts.last_name == find_res)
+        contact = Contacts.select().where((Contacts.last_name == find_res) | (Contacts.id == find_res))
         
         for person in contact:
             print('<------/------>')
