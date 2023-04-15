@@ -116,8 +116,9 @@ def Find():
         if find_res.lower() == "all":
             for person in all_contacts:
                 print('<------/------>')
-                print('    First Name: {} \n     Last Name: {} \n  Phone Number: {} \n         Email: {} \nAddress line 1: {} \nAddress line 2: {} \n          City: {} \n       Zipcode: {} \n         Notes: {} \n       Created: {}'
-                      .format(person.first_name, 
+                print('            ID: {} \n    First Name: {} \n     Last Name: {} \n  Phone Number: {} \n         Email: {} \nAddress line 1: {} \nAddress line 2: {} \n          City: {} \n       Zipcode: {} \n         Notes: {} \n       Created: {}'
+                      .format(person.id,
+                              person.first_name, 
                               person.last_name, 
                               person.phone_number, 
                               person.email, 
@@ -131,8 +132,9 @@ def Find():
         else:
             for person in contact:
                 print('<------/------>')
-                print('    First Name: {} \n     Last Name: {} \n  Phone Number: {} \n         Email: {} \nAddress line 1: {} \nAddress line 2: {} \n          City: {} \n       Zipcode: {} \n         Notes: {} \n       Created: {}'
-                      .format(person.first_name, 
+                print('            ID: {} \n    First Name: {} \n     Last Name: {} \n  Phone Number: {} \n         Email: {} \nAddress line 1: {} \nAddress line 2: {} \n          City: {} \n       Zipcode: {} \n         Notes: {} \n       Created: {}'
+                      .format(person.id,
+                              person.first_name, 
                               person.last_name, 
                               person.phone_number, 
                               person.email, 
@@ -155,6 +157,30 @@ def Find():
             find_running = False
             break
 
+def Delete():
+    
+    delete_running = True
+    while delete_running:
+        
+        print('<------/------>')
+        print('Delete contact by ID.')
+
+        input_delete = input('-> ')
+        delete_res = str(input_delete)
+
+        del_contact = Contacts.get(Contacts.id == delete_res)
+        del_contact.delete_instance()
+
+        print('<------/------>')
+        print('Would you like to Delete another contact?: Yes(y) No(n)')
+        input_next = input('-> ')
+        next_res = str(input_next)
+
+        if next_res.lower() == 'y':
+            delete_running = True
+        else:
+            delete_running = False
+            break
 
 def Start():
     
@@ -163,7 +189,7 @@ def Start():
 
         print('<------/------>')
         print('Welcome to Contacts')
-        print('To get started type: Find, Add, Help, End')
+        print('To get started type: Find, Add, Delete, Help, End')
 
         input_start = input('-> ')
         start_res = str(input_start)
@@ -174,6 +200,8 @@ def Start():
             Help()
         elif start_res.lower()== 'find':
             Find()
+        elif start_res.lower()== 'delete':
+            Delete()
         elif start_res.lower() == 'end':
             print('<------/------>')
             print('Thank You for using Contacts!')
