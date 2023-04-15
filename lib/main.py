@@ -23,27 +23,15 @@ class Contacts(BaseModel):
     # address = CharField(default = '', max_length=350)
     # city = CharField(default = '')
     # zipcode = IntegerField(default = None)
+    # note = TextField()
     # contact_updated = DateTimeField()
     # favorite = True
 
-# db.drop_tables([Contacts])
+db.drop_tables([Contacts])
 db.create_tables([Contacts])
 
-# eric = Contacts(
-#   first_name = 'Eric', 
-#   last_name = 'Spychalski', 
-#   phone_number = '123-456-7890',
-#   email = 'Eric@email.com',
-#   address= '42 walaby way',
-#   city = 'Sydney',
-#   zipcode = 90192
-#   )
-
-# eric.save()
-# running = True
-# while running:
-
-def new_contact():
+running = True
+while running:
     
     input_first = input('First name of contact: ')
     first_res = str(input_first)
@@ -51,18 +39,26 @@ def new_contact():
     input_last = input('Last name of contat: ')
     last_res = str(input_last) 
 
-    
-
-    eric = Contacts(
+    new_contact = Contacts(
       first_name = first_res, 
       last_name = last_res 
       # phone_number = '123-456-7890',
       # email = 'Eric@email.com',
       # address= '42 walaby way',
       # city = 'Sydney',
-      # zipcode = 90192
+      # zipcode = 90192,
+      
       )
 
-    eric.save()
+    new_contact.save()
 
-new_contact()
+    input_next = input('Would you like to add another contact?: Yes(y) No(n) ')
+    next_res = str(input_next)
+
+    if next_res == 'y':
+        print('Add another contact:')
+        running = True
+    else:
+        running = False
+        break
+    
