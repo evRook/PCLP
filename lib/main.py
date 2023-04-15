@@ -119,7 +119,7 @@ def Find():
     while find_running:
         
         print('<------/------>')
-        print('Find contact by Last Name. OR See all contacts with comand All')
+        print('Find contact by Last Name. OR See all contacts with command All')
 
         input_find = input('-> ')
         find_res = str(input_find)
@@ -308,13 +308,13 @@ def Start():
 
         if start_res.lower() == 'add':
             Create()
-        elif start_res.lower()== 'help':
+        elif start_res.lower() == 'help':
             Help()
-        elif start_res.lower()== 'find':
+        elif start_res.lower() == 'find':
             Find()
-        elif start_res.lower()== 'delete':
+        elif start_res.lower() == 'delete':
             Delete()
-        elif start_res.lower()== 'update':
+        elif start_res.lower() == 'update':
             Update()
         elif start_res.lower() == 'end':
             print('<------/------>')
