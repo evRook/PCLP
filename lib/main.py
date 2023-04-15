@@ -102,6 +102,8 @@ def Help():
     print('Help -> Opens HELP SCREEN')
     print('End -> Exit Contacts')
 
+
+
 def Start():
     
     start_running = True
@@ -118,5 +120,12 @@ def Start():
             Create()
         elif start_res.lower()== 'help':
             Help()
+        else:
+            print('<------/------>')
+            print('Thank You for using Contacts!')
+            print('<------/------>')
+            start_running = False
+            break
+
              
 Start()
