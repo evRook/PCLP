@@ -105,7 +105,7 @@ def Create():
 def Help():
     print('<------/------>')
     print('HELP SCREEN')
-    print('Find -> Find a contact by Last Name.')
+    print('Find -> Find a contact by Last Name. Or see all contacts with command All')
     print('Add -> Create a new contact, First Name, Last Name & Phone Number are REQUIRED.')
     print('Update -> Update contact info by ID.')
     print('Delete -> Delete contact info by ID.')
@@ -119,7 +119,7 @@ def Find():
     while find_running:
         
         print('<------/------>')
-        print('Find contact by Last Name.')
+        print('Find contact by Last Name. OR See all contacts with comand All')
 
         input_find = input('-> ')
         find_res = str(input_find)
