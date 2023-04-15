@@ -96,7 +96,7 @@ def Help():
     print('<------/------>')
     print('HELP SCREEN')
     print('Add -> Create a new contact, First Name, Last Name & Phone Number are REQUIRED.')
-    print('Find -> Find a contact by Last Name or ID.')
+    print('Find -> Find a contact by Last Name.')
     print('Help -> Opens HELP SCREEN')
     print('End -> Exit Contacts')
 
@@ -106,26 +106,41 @@ def Find():
     while find_running:
         
         print('<------/------>')
-        print('Find contact by Last Name or ID.')
+        print('Find contact by Last Name.')
 
         input_find = input('-> ')
         find_res = str(input_find)
+        contact = Contacts.select().where((Contacts.last_name == find_res))
+        all_contacts = Contacts.select()
 
-        contact = Contacts.select().where((Contacts.last_name == find_res) | (Contacts.id == find_res))
-        
-        for person in contact:
-            print('<------/------>')
-            print('    First Name: {} \n     Last Name: {} \n  Phone Number: {} \n         Email: {} \nAddress line 1: {} \nAddress line 2: {} \n          City: {} \n       Zipcode: {} \n         Notes: {}'
-                  .format(person.first_name, 
-                          person.last_name, 
-                          person.phone_number, 
-                          person.email, 
-                          person.address1, 
-                          person.address2, 
-                          person.city, 
-                          person.zipcode, 
-                          person.note
-                          ))
+        if find_res.lower() == "all":
+            for person in all_contacts:
+                print('<------/------>')
+                print('    First Name: {} \n     Last Name: {} \n  Phone Number: {} \n         Email: {} \nAddress line 1: {} \nAddress line 2: {} \n          City: {} \n       Zipcode: {} \n         Notes: {}'
+                      .format(person.first_name, 
+                              person.last_name, 
+                              person.phone_number, 
+                              person.email, 
+                              person.address1, 
+                              person.address2, 
+                              person.city, 
+                              person.zipcode, 
+                              person.note
+                              ))
+        else:
+            for person in contact:
+                print('<------/------>')
+                print('    First Name: {} \n     Last Name: {} \n  Phone Number: {} \n         Email: {} \nAddress line 1: {} \nAddress line 2: {} \n          City: {} \n       Zipcode: {} \n         Notes: {}'
+                      .format(person.first_name, 
+                              person.last_name, 
+                              person.phone_number, 
+                              person.email, 
+                              person.address1, 
+                              person.address2, 
+                              person.city, 
+                              person.zipcode, 
+                              person.note
+                              ))
             
         print('<------/------>')
         print('Would you like to Find another contact?: Yes(y) No(n)')
@@ -157,12 +172,15 @@ def Start():
             Help()
         elif start_res.lower()== 'find':
             Find()
-        else:
+        elif start_res.lower() == 'end':
             print('<------/------>')
             print('Thank You for using Contacts!')
             print('<------/------>')
             start_running = False
             break
-
-             
+        else:
+            print('<------/------>')
+            print(f'COMMAND "{start_res}" NOT FOUND')
+            Help()
+          
 Start()
