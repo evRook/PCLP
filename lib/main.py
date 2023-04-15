@@ -211,10 +211,44 @@ def Update():
         if spec_res.lower() == 'first':
             update_contact.first_name = update_res
             update_contact.save()
-        
+        elif spec_res.lower() == 'last':
+            update_contact.last_name = update_res
+            update_contact.save()
+        elif spec_res.lower() == 'phone':
+            update_contact.phone_number = update_res
+            update_contact.save()
+        elif spec_res.lower() == 'email':
+            update_contact.email = update_res
+            update_contact.save()
+        elif spec_res.lower() == 'address1':
+            update_contact.address1 = update_res
+            update_contact.save()
+        elif spec_res.lower() == 'address2':
+            update_contact.address2 = update_res
+            update_contact.save()
+        elif spec_res.lower() == 'city':
+            update_contact.city = update_res
+            update_contact.save()
+        elif spec_res.lower() == 'zipcode':
+            update_contact.zipcode = update_res
+            update_contact.save()
+        elif spec_res.lower() == 'note':
+            update_contact.note = update_res
+            update_contact.save()
+        else:
+            print('<------/------>')
+            print(f'COMMAND {spec_res} NOT RECOGNIZED')
 
+        print('<------/------>')
+        print('Would you like to Update another contact?: Yes(y) No(n)')
+        input_next = input('-> ')
+        next_res = str(input_next)
 
-
+        if next_res.lower() == 'y':
+            update_running = True
+        else:
+            update_running = False
+            break
 
 def Start():
     
