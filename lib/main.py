@@ -1,4 +1,5 @@
 from peewee import *
+import datetime
 
 db = PostgresqlDatabase(
   'contacts', 
@@ -20,15 +21,14 @@ class Contacts(BaseModel):
     last_name = CharField()
     phone_number = CharField()
     email = CharField(null = True)
-    address1 = CharField(null = True, max_length=350)
+    address1 = CharField(null = True, max_length = 350)
     address2 = CharField(null = True)
     city = CharField(null = True)
     zipcode = CharField(null = True)
     note = TextField(null = True)
-    # contact_updated = DateTimeField()
-    # favorite = True
+    created = DateTimeField(default = datetime.datetime.now())
 
-
+# db.drop_tables([Contacts])
 db.create_tables([Contacts])
 
 
@@ -116,7 +116,7 @@ def Find():
         if find_res.lower() == "all":
             for person in all_contacts:
                 print('<------/------>')
-                print('    First Name: {} \n     Last Name: {} \n  Phone Number: {} \n         Email: {} \nAddress line 1: {} \nAddress line 2: {} \n          City: {} \n       Zipcode: {} \n         Notes: {}'
+                print('    First Name: {} \n     Last Name: {} \n  Phone Number: {} \n         Email: {} \nAddress line 1: {} \nAddress line 2: {} \n          City: {} \n       Zipcode: {} \n         Notes: {} \n       Created: {}'
                       .format(person.first_name, 
                               person.last_name, 
                               person.phone_number, 
@@ -125,12 +125,13 @@ def Find():
                               person.address2, 
                               person.city, 
                               person.zipcode, 
-                              person.note
+                              person.note,
+                              person.created
                               ))
         else:
             for person in contact:
                 print('<------/------>')
-                print('    First Name: {} \n     Last Name: {} \n  Phone Number: {} \n         Email: {} \nAddress line 1: {} \nAddress line 2: {} \n          City: {} \n       Zipcode: {} \n         Notes: {}'
+                print('    First Name: {} \n     Last Name: {} \n  Phone Number: {} \n         Email: {} \nAddress line 1: {} \nAddress line 2: {} \n          City: {} \n       Zipcode: {} \n         Notes: {} \n       Created: {}'
                       .format(person.first_name, 
                               person.last_name, 
                               person.phone_number, 
@@ -139,7 +140,8 @@ def Find():
                               person.address2, 
                               person.city, 
                               person.zipcode, 
-                              person.note
+                              person.note,
+                              person.created
                               ))
             
         print('<------/------>')
