@@ -31,27 +31,16 @@ class Contacts(BaseModel):
 db.drop_tables([Contacts])
 db.create_tables([Contacts])
 
-# def Start():
-    
-#     start_running = True
-#     while start_running:
-      
-#         print('Welcome to Contacts')
-#         print('To get started type: Add, Delete, Update, Find, Help')
 
-#         input_start = input('-> ')
-#         start_res = str(input_start)
-
-#         if start_res.lower == 'add':
-#             Create()
-          
-# Start()
 
 
 def Create():
-    running = True
-    while running:
+    create_running = True
+    while create_running:
         
+        print('<------/------>')
+        print("Add new contact:")
+
         input_first = input('First Name: ')
         first_res = str(input_first)
 
@@ -92,15 +81,42 @@ def Create():
         )
 
         new_contact.save()
-
-        input_next = input('Would you like to add another contact?: Yes(y) No(n) ')
+        
+        print('<------/------>')
+        print('Would you like to add another contact?: Yes(y) No(n)')
+        input_next = input('-> ')
         next_res = str(input_next)
 
         if next_res.lower() == 'y':
-            print('Add another contact:')
-            running = True
+            create_running = True
         else:
-            running = False
+            create_running = False
             break
 
 
+def Help():
+    print('<------/------>')
+    print('HELP SCREEN')
+    print('Add -> Create a new contact, First Name, Last Name & Phone Number are REQUIRED.')
+    print('Find -> Find a contact by Last Name or ID.')
+    print('Help -> Opens HELP SCREEN')
+    print('End -> Exit Contacts')
+
+def Start():
+    
+    start_running = True
+    while start_running:
+
+        print('<------/------>')
+        print('Welcome to Contacts')
+        print('To get started type: Find, Add, Help, End')
+
+        input_start = input('-> ')
+        start_res = str(input_start)
+
+        if start_res.lower() == 'add':
+            Create()
+        elif start_res.lower()== 'help':
+            Help()
+             
+Start()
