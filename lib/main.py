@@ -28,10 +28,8 @@ class Contacts(BaseModel):
     # contact_updated = DateTimeField()
     # favorite = True
 
-db.drop_tables([Contacts])
+
 db.create_tables([Contacts])
-
-
 
 
 def Create():
@@ -102,6 +100,43 @@ def Help():
     print('Help -> Opens HELP SCREEN')
     print('End -> Exit Contacts')
 
+def Find():
+    
+    find_running = True
+    while find_running:
+        
+        print('<------/------>')
+        print('Find contact by Last Name or ID.')
+
+        input_find = input('-> ')
+        find_res = str(input_find)
+
+        contact = Contacts.select().where(Contacts.last_name == find_res)
+        
+        for person in contact:
+            print('<------/------>')
+            print('    First Name: {} \n     Last Name: {} \n  Phone Number: {} \n         Email: {} \nAddress line 1: {} \nAddress line 2: {} \n          City: {} \n       Zipcode: {} \n         Notes: {}'
+                  .format(person.first_name, 
+                          person.last_name, 
+                          person.phone_number, 
+                          person.email, 
+                          person.address1, 
+                          person.address2, 
+                          person.city, 
+                          person.zipcode, 
+                          person.note
+                          ))
+            
+        print('<------/------>')
+        print('Would you like to Find another contact?: Yes(y) No(n)')
+        input_next = input('-> ')
+        next_res = str(input_next)
+
+        if next_res.lower() == 'y':
+            find_running = True
+        else:
+            find_running = False
+            break
 
 
 def Start():
@@ -120,6 +155,8 @@ def Start():
             Create()
         elif start_res.lower()== 'help':
             Help()
+        elif start_res.lower()== 'find':
+            Find()
         else:
             print('<------/------>')
             print('Thank You for using Contacts!')
